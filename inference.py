@@ -4,7 +4,7 @@ from os.path import join as pjoin
 import cv2
 import torch
 
-if __name__ == '__main__':
+def inference():
     cfg = ConfigInference()
     print('Pick device: ', cfg.DEVICE)
     device = torch.device(cfg.DEVICE)
@@ -20,10 +20,11 @@ if __name__ == '__main__':
     net.to(device)
 
     # 数据生成器
-    print('Preparing data... batch_size: {}, image_size: {}, crop_offset: {}'.format(cfg.BATCH_SIZE, cfg.IMAGE_SIZE, cfg.HEIGHT_CROP_OFFSET))
+    print('Preparing data... batch_size: {}, image_size: {}, crop_offset: {}'.format(cfg.BATCH_SIZE, cfg.IMAGE_SIZE,
+                                                                                     cfg.HEIGHT_CROP_OFFSET))
     # todo
     data_generator = utils.test_data_generator(cfg.IMAGE_ROOT,
-                                                cfg.BATCH_SIZE, cfg.IMAGE_SIZE, cfg.HEIGHT_CROP_OFFSET)
+                                               cfg.BATCH_SIZE, cfg.IMAGE_SIZE, cfg.HEIGHT_CROP_OFFSET)
 
     # 推断
     print('Let us inference ...')
@@ -33,10 +34,10 @@ if __name__ == '__main__':
         if images is None:
             break
         images = images.to(device)
-        
+
         predicts = net(images)
         predicts = predicts.cpu().detach().numpy()
-        
+
         # 恢复成原先的尺寸
         outs = utils.decodePredicts(predicts, cfg.IMAGE_SIZE_ORG, cfg.HEIGHT_CROP_OFFSET, mode='color')
 
@@ -51,3 +52,7 @@ if __name__ == '__main__':
         print('Finished {} images'.format(done_num))
 
     print('Done')
+
+
+if __name__ == '__main__':
+    inference()
