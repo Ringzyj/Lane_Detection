@@ -15,8 +15,8 @@ if __name__ == '__main__':
     net.eval()
 
     # 加载预训练权重
-    print('Load pretrain weights: ', cfg.PRETRAINED_WEIGHTS)
-    net.load_state_dict(torch.load(cfg.PRETRAINED_WEIGHTS, map_location='cpu'))
+    print('Load pretrain weights: ', './weights_ep_3_0.021_0.573.pth')
+    net.load_state_dict(torch.load('./weights_ep_3_0.021_0.573.pth', map_location='cpu'))
     net.to(device)
 
     # 数据生成器
