@@ -10,8 +10,6 @@ class ConfigInference(object):
     LABEL_ROOT = pjoin(DATA_ROOT, 'TestLabel')
     OVERLAY_ROOT = pjoin(DATA_ROOT, 'TestOverlay')
     WEIGHTS_ROOT = pjoin(PROJECT_ROOT, 'weights')
-    PRETRAINED_WEIGHTS = pjoin(WEIGHTS_ROOT, '768x256_b8_unet_resnet34', 'weights_ep_3_0.026_0.592.pth')
-    LOG_ROOT = pjoin(PROJECT_ROOT, 'logs')
 
     # 设备
     DEVICE = 'cuda:0'
@@ -25,7 +23,7 @@ class ConfigInference(object):
     IMAGE_SIZE = (1024, 384)  # 训练的图片的尺寸(h,w)
     # IMAGE_SIZE = (1536, 512)  # 训练的图片的尺寸(h,w)
     HEIGHT_CROP_OFFSET = 690  # 在height方向上将原图裁掉的offset
-    BATCH_SIZE = 4  # 数据批次大小
+    BATCH_SIZE = 1  # 数据批次大小
 
     # 原图的大小
     IMAGE_SIZE_ORG = (3384, 1710)
